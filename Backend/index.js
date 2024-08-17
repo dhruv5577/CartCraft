@@ -1,9 +1,7 @@
 const express=require('express');
-
-const mongoose=require('mongoose');
 const dotenv=require("dotenv");
+const mongoose=require('mongoose');
 const ProductRouter = require('./Routes/ProductRoutes');
-const errorhandler = require('./Middlewares/ErrorHandler');
 // const  connectDB  = require('./Utils/DBconnect');
 dotenv.config()
 
@@ -11,15 +9,15 @@ const app=express();
 
 // //DB connection
 
-let DB_URL='';
-console.log('Connecting to MongoDB at:', DB_URL);
+// let DB_URL='';
+// console.log('Connecting to MongoDB at:', DB_URL);
 
-if(process.env.NODE_ENV==='DEVELOPMENT') DB_URL=process.env.MONGO_LOCAL_URL
-if(process.env.NODE_ENV==='PRODUCTION') DB_URL=process.env.MONGO_URL;
+// if(process.env.NODE_ENV==='DEVELOPMENT') DB_URL+=
+// // if(process.env.NODE_ENV==='PRODUCTION') DB_URL=process.env.MONGO_URL;
 
 // console.log('Connecting to MongoDB at:', DB_URL);
 
-mongoose.connect(DB_URL)
+mongoose.connect(process.env.MONGO_LOCAL_URL)
 .then(()=>console.log('DB connected')).catch((e)=>console.log(e))
 
 
