@@ -1,16 +1,21 @@
-const express=require('express');
-const Productctrl = require('../Controllers/Productctrl');
+import express from 'express';
+import Productctrl from '../Controllers/Productctrl.js';
 
-const ProductRouter=express.Router();
+const ProductRouter = express.Router();
 
+// Route to get all products
 ProductRouter.get('/api/v1/product/getproducts',Productctrl.getAllProduct);
 
-ProductRouter.post('/api/v1/product/admin/addproduct',Productctrl.AddProduct);
+// Route to add a new product (admin)
+ProductRouter.post('/api/v1/product/admin/addproduct', Productctrl.AddProduct);
 
-ProductRouter.get('/api/v1/product/:id',Productctrl.getProduct);
+// Route to get a product by ID
+ProductRouter.get('/api/v1/product/:id', Productctrl.getProduct);
 
-ProductRouter.put('/api/v1/product/admin/:id',Productctrl.updateProduct);
+// Route to update a product by ID (admin)
+ProductRouter.put('/api/v1/product/admin/:id', Productctrl.updateProduct);
 
-ProductRouter.delete('/api/v1/product/admin/:id',Productctrl.DeleteProduct);
+// Route to delete a product by ID (admin)
+ProductRouter.delete('/api/v1/product/admin/:id', Productctrl.DeleteProduct);
 
-module.exports=ProductRouter
+export default ProductRouter;

@@ -1,12 +1,12 @@
-const mongoose=require('mongoose');
-const Product = require('./Model/Product');
-const data = require('./data');
+import mongoose from 'mongoose';
+import Product from './Model/Product';
+import data from './data.js';
 
-const package=async()=>{
+const startData=async()=>{
 
   try {
     console.log("db connection 1")
-    await mongoose.connect("mongodb://localhost:27017/cartcraft");
+    await connect("mongodb://localhost:27017/cartcraft");
     console.log("db connection 2")
 
     await Product.deleteMany();
@@ -22,4 +22,4 @@ const package=async()=>{
   }
 }
 
-package();
+startData();

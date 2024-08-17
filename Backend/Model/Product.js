@@ -1,6 +1,6 @@
-const mongoose=require('mongoose')
+import  mongoose,{Schema} from 'mongoose'
 
-const ProductSchema=new mongoose.Schema({
+const ProductSchema=new Schema({
   name:{
     type:String,
     required:[true,'Please Enter The Product Name'],
@@ -62,7 +62,7 @@ const ProductSchema=new mongoose.Schema({
   reviews:[
     {
       user:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'user',
         required:true
       },
@@ -77,7 +77,7 @@ const ProductSchema=new mongoose.Schema({
     }
   ],
   user:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:Schema.Types.ObjectId,
     ref:'user',
     required:false
   }
@@ -86,4 +86,4 @@ const ProductSchema=new mongoose.Schema({
   timestamps:true
 })
 
-module.exports=mongoose.model("Product",ProductSchema)
+export default mongoose.model("Product",ProductSchema)
