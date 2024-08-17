@@ -6,7 +6,8 @@
   "scripts": {
     "run":"node index.js",
     "dev": "SET NODE_ENV=DEVELOPMENT & nodemon index.js",
-    "build":"SET NODE_ENV=PRODUCTION & nodemon index.js"
+    "build":"SET NODE_ENV=PRODUCTION & nodemon index.js",
+    "insertion":"node insertion.js "
   },
   "keywords": [],
   "author": "",
