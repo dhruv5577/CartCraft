@@ -1,13 +1,26 @@
 import catchAsyncError from "../Middlewares/catchasyncerror.js";
 import Product from "../Model/Product.js";
 import ErrorHandler from '../Utils/ErrorHandler.js'
+import filter from "../Utils/filter.js";
 
 const Productctrl = {
   //* Get all products
   getAllProduct: catchAsyncError(async (req, res, next) => {
-    const product = await Product.find();
+    const pagenum=4
+    const filters=new filter(Product,req.query).search()
+    
+
+    let products=await filters.query
+    let filtercount=products.length
+
+    filters.paginate(pagenum);
+    products=await filters.query.clone()
+
+   
     res.status(200).json({
-      product,
+      pagenum,
+      filtercount,
+      products
     });
   }),
 
