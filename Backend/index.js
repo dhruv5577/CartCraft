@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import ProductRouter from './Routes/ProductRoutes.js';
-import errorhandler from './Middlewares/ErrorHandler.js';
 import AuthRouter from './Routes/AuthRoutes.js';
 import cookieParser from 'cookie-parser';
 
@@ -31,7 +30,7 @@ app.use(cookieParser());
 
 app.use('/', ProductRouter);
 app.use('/',AuthRouter);
-app.use(errorhandler);
+
 
 
 // Start the server
