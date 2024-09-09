@@ -30,7 +30,7 @@ class filter{
     let str=JSON.stringify(querycopy);
     str=str.replace(/\b(gt|gte|lt|lte)\b/g,(match)=>`$${match}`)
 
-    this.query=this.query.find(JSON.parse(querystr));
+    this.query=this.query.find(JSON.parse(str));
     return this
 
 

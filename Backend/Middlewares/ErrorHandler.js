@@ -6,6 +6,7 @@ export default (err, req, res, next) => {
     statusCode: err?.statusCode || 500,
     message: err?.message || "Internal Server Error",
   };
+  
 
   // Handle Invalid Mongoose ID Error
   if (err.name === "CastError") {

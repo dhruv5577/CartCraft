@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import ProductRouter from './Routes/ProductRoutes.js';
 import errorhandler from './Middlewares/ErrorHandler.js';
+import AuthRouter from './Routes/AuthRoutes.js';
+import cookieParser from 'cookie-parser';
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8080; // Use a default port if not defined
+const port = process.env.PORT || 8080; 
 
 // Unhandle uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -26,15 +27,18 @@ mongoose.connect(process.env.MONGO_LOCAL_URL)
   });
 
 app.use(express.json());
+app.use(cookieParser());
 
-// Production Routes
 app.use('/', ProductRouter);
+app.use('/',AuthRouter);
 app.use(errorhandler);
+
 
 // Start the server
 const server = app.listen(port, () => {
   console.log(`Server is running on port : ${port}`);
 });
+
 
 // Unhandle promise rejections
 process.on("unhandledRejection", (err) => {
