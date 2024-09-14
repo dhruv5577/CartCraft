@@ -9,7 +9,7 @@ const startData=async()=>{
 
   try {
     console.log("db connection 1")
-    await connect(DB_URI);
+    await connect(MONGO_LOCAL_URL);
     console.log("db connection 2")
 
     await Product.deleteMany();
