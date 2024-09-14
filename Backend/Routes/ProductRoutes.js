@@ -19,4 +19,15 @@ ProductRouter.put('/api/v1/product/admin/:id',isAuthenticatedUser,isAuthorized("
 // Route to delete a product by ID (admin)
 ProductRouter.delete('/api/v1/product/admin/:id',isAuthenticatedUser,isAuthorized("admin"), Productctrl.DeleteProduct);
 
+// create an review
+ProductRouter.put('/api/v1/review',isAuthenticatedUser, Productctrl.CreateProductReview);
+
+//get all reviews
+ProductRouter.get('/api/v1/review',isAuthenticatedUser, Productctrl.getallreviews);
+
+
+// delete the review (admin)
+ProductRouter.delete('/api/v1/admin/review',isAuthenticatedUser,isAuthorized("admin"), Productctrl.DeleteProductReview);
+
+
 export default ProductRouter;
