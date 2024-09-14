@@ -5,6 +5,7 @@ import ProductRouter from './Routes/ProductRoutes.js';
 import AuthRouter from './Routes/AuthRoutes.js';
 import cookieParser from 'cookie-parser';
 import UserRouter from './Routes/UserRoutes.js';
+import OrderRoutes from './Routes/OrderRoutes.js';
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use('/', ProductRouter);
 app.use('/',AuthRouter);
 app.use('/',UserRouter);
+app.use('/',OrderRoutes);
 
 
 

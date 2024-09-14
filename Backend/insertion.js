@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 import Product from './Model/Product';
 import data from './data.js';
+import dotenv from 'dotenv'
+dotenv.config();
+
 
 const startData=async()=>{
 
   try {
     console.log("db connection 1")
-    await connect("mongodb://localhost:27017/cartcraft");
+    await connect(DB_URI);
     console.log("db connection 2")
 
     await Product.deleteMany();
