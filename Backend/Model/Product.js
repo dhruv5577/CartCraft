@@ -39,7 +39,7 @@ const ProductSchema=new Schema({
     type:String,
     required:[true,'Enter Produc Category'],
     enum:{
-      values:['Electronics','Accessories','Food','Books','Sports','Home',],
+      values:['Electronics','Outdoor','Accessories','Food','Books','Sports','Home'],
       message:'please select correct Category'
     },
 

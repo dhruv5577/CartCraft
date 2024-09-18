@@ -1,0 +1,1 @@
+export const PRODUCT_CAT=['Electronics','Outdoor','Accessories','Food','Books','Sports','Home']

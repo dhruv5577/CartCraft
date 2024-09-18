@@ -6,7 +6,17 @@ export const ProductApi=createApi({
   baseQuery:fetchBaseQuery({baseUrl:"/api/v1"}),
   endpoints:(builder)=>({
     getProducts:builder.query({
-      query:(params)=>"/product/getproducts"
+      query:(params)=>({
+        url:"/product/getproducts",
+        params:{
+          page:params?.page,
+          keyword:params?.keyword,
+          category:params?.category,
+          "ratings[gte]":params?.ratings,
+          "price[gte]":params?.min,
+          "price[lte]":params?.max 
+        }
+      })
     }),
     getProductDesc:builder.query({
       query:(id)=>`/product/${id}`

@@ -4,11 +4,39 @@ import { useGetProductsQuery } from '../Redux/API/ProductApi'
 import ProductItem from './Product/ProductItem';
 import Loader from './Layout/Loader';
 import toast from 'react-hot-toast';
+import PageOutlet from './Layout/PageOutlet';
+import { useSearchParams } from 'react-router-dom';
+import Sidebar from './Layout/Sidebar';
 
 function Display() {
 
-  const {data,isLoading,error,isError} =useGetProductsQuery();
+  let [searchParams]=useSearchParams();
+  const page=searchParams.get('page')||1
+  const keyword=searchParams.get('keyword')||""
+  const min=searchParams.get('min')
+  const max=searchParams.get('max')
+  const category=searchParams.get('category')
+  const ratings=searchParams.get('ratings')
 
+  const params={page,keyword}
+
+  if(min!=null){
+    params.min=min
+  }
+  if(max!=null){
+    params.max=max
+  }
+  if(category!=null){
+    params.category=category
+  }
+  if(ratings!=null){
+    params.ratings=ratings
+  }
+
+  const {data,isLoading,error,isError} =useGetProductsQuery(params);
+
+
+  const colsize=keyword?4:3;
 
   useEffect(()=>{
     if(isError){
@@ -29,16 +57,22 @@ function Display() {
     <>
     <Metadata title={"Best Buy Products Online"}/>
       <div className="row">
-        <div className="col-12 col-sm-6 col-md-12">
+        {keyword && (
+          <div className='col-6 col-md-3 mt-5 '>
+            <Sidebar/>
+          </div>
+        )}
+        <div className={keyword ? "col-6 col-md-9" : "col-6 col-md-12"}>
           <h1 id="products_heading" className="text-secondary">Latest Products</h1>
 
           <section id="products" className="mt-5">
             <div className="row">
               {data?.products?.map((product)=>(
-                <ProductItem product={product}/>
+                <ProductItem product={product} colsize={colsize}/>
               ))}
             </div>
           </section>
+          <PageOutlet pagenum={data?.pagenum} filtercount={data?.filtercount}/>
         </div>
       </div>
     </>

@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import StarRatings from 'react-star-ratings';
 
-export default function ProductItem({product}) {
+export default function ProductItem({product,colsize}) {
   return (
-      <div className="col-sm-12 col-md-6 col-lg-3 my-3">
+      <div className={`col-sm-12 col-md-6 col-lg-${colsize} my-3`}>
         <div className="card p-3 rounded">
             <img
               className="card-img-top mx-auto"
@@ -18,8 +18,8 @@ export default function ProductItem({product}) {
                     </h5>
                     <div className="ratings mt-auto d-flex">
                     <StarRatings
-                      rating={product?.rating}
-                      starRatedColor="blue"
+                      rating={product?.ratings}
+                      starRatedColor="orange"
                       numberOfStars={5}
                       name='rating'
                       starSpacing='1px'
