@@ -1,7 +1,15 @@
 import React from 'react'
 import SearchBar from './SearchBar'
+import { useGetUserdetailsQuery } from '../../Redux/API/UserApii'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 function Header() {
+
+  const {isLoading}= useGetUserdetailsQuery()
+  
+  const {user} =useSelector((st)=>st.auth)
+
   return (
     <div>
       <nav className="navbar row">
@@ -21,7 +29,8 @@ function Header() {
           <span className="ms-1" id="cart_count">0</span>
         </a>
 
-        <div className="ms-4 dropdown">
+        {user?(
+          <div className="ms-4 dropdown">
           <button
             className="btn dropdown-toggle text-white"
             type="button"
@@ -36,20 +45,23 @@ function Header() {
                 className="rounded-circle"
               />
             </figure>
-            <span>User</span>
+            <span>{user?.name}</span>
           </button>
           <div className="dropdown-menu w-100" aria-labelledby="dropDownMenuButton">
-            <a className="dropdown-item" href="/admin/dashboard"> Dashboard </a>
+            <Link className="dropdown-item" to="/admin/dashboard"> Dashboard </Link>
 
-            <a className="dropdown-item" href="/me/orders"> Orders </a>
+            <Link className="dropdown-item" to="/me/orders"> Orders </Link>
 
-            <a className="dropdown-item" href="/me/profile"> Profile </a>
+            <Link className="dropdown-item" to="/me/profile"> Profile </Link>
 
-            <a className="dropdown-item text-danger" href="/"> Logout </a>
+            <Link className="dropdown-item text-danger" to="/"> Logout </Link>
           </div>
         </div>
+        ):(!isLoading && (<Link to="/login" className="btn ms-4" id="login_btn"> Login </Link>))}
 
-        <a href="/login" className="btn ms-4" id="login_btn"> Login </a>
+        
+
+        
       </div>
     </nav>
     </div>

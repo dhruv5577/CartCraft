@@ -22,8 +22,6 @@ const Productctrl = {
       return res.status(404).json({success:false,message:"No Product found"})
     }
 
-    
-
     res.status(200).json({
       pagenum,
       filtercount,

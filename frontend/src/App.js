@@ -5,6 +5,8 @@ import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
 import Footer from './Components/Layout/Footer';
 import Header from './Components/Layout/Header';
 import ProductDesc from './Components/Product/ProductDesc';
+import Login from './Components/AUthenticate/Login';
+import Register from './Components/AUthenticate/Register';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Display/>}/>
           <Route path="/product/:id" element={<ProductDesc/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
         </Routes>
       </div>
       <Footer/>

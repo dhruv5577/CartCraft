@@ -9,27 +9,9 @@ const OrderController={
   //!create new order
   createneworder:catchasyncerror(async(req,res,next)=>{
 
-    const {orderitems,
-           shippingInfo,
-           itemsprice,
-           taxamount,
-           shippingamount,
-           totalamount,
-           paymentmethod,
-           paymentinfo
-          }=req.body;
+    const {orderitems,shippingInfo,itemsprice,taxamount,shippingamount,totalamount,paymentmethod,paymentinfo}=req.body;
 
-  const order=await Order.create({
-    orderitems,
-    shippingInfo,
-    itemsprice,
-    taxamount,
-    shippingamount,
-    totalamount,
-    paymentmethod,
-    paymentinfo,
-    user:req.user._id,
-  });
+  const order=await Order.create({orderitems,shippingInfo,itemsprice,taxamount,shippingamount,totalamount,paymentmethod,paymentinfo,user:req.user._id,});
 
   res.status(200).json({order})
   }),
