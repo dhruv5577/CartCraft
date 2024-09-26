@@ -2,13 +2,22 @@ import React from 'react'
 import SearchBar from './SearchBar'
 import { useGetUserdetailsQuery } from '../../Redux/API/UserApii'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLazyLogoutQuery } from '../../Redux/API/AuthhApi'
 
 function Header() {
 
   const {isLoading}= useGetUserdetailsQuery()
-  
   const {user} =useSelector((st)=>st.auth)
+  const navigate=useNavigate();
+
+  const [logout] =useLazyLogoutQuery();
+
+  const handlelogout=()=>{
+    logout();
+    navigate(0);
+  }
+
 
   return (
     <div>
@@ -54,7 +63,7 @@ function Header() {
 
             <Link className="dropdown-item" to="/me/profile"> Profile </Link>
 
-            <Link className="dropdown-item text-danger" to="/"> Logout </Link>
+            <Link className="dropdown-item text-danger" to="/" onClick={handlelogout}> Logout </Link>
           </div>
         </div>
         ):(!isLoading && (<Link to="/login" className="btn ms-4" id="login_btn"> Login </Link>))}

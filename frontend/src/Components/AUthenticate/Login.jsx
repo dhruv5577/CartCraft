@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import { useLoginMutation } from '../../Redux/API/AuthhApi';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Login() {
 
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const navigate=useNavigate();
+
+  const {isAuthenticate}=useSelector((st)=>st.auth)
 
   const [login,{isloading,error,data}]=useLoginMutation();
 
   console.log(data)
 
   useEffect(()=>{
+    if(isAuthenticate){
+      navigate('/');
+    }
     if(error){
       toast.error(error?.data?.message);
     }
-  },[error])
+  },[error, isAuthenticate, navigate])
 
   const submithandle=(e)=>{
     e.preventDefault();
     const bodydata={email,password};
 
-    login(bodydata)
+    login(bodydata);
+    // navigate('/')
 
   }
 
