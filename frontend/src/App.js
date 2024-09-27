@@ -7,6 +7,9 @@ import Header from './Components/Layout/Header';
 import ProductDesc from './Components/Product/ProductDesc';
 import Login from './Components/AUthenticate/Login';
 import Register from './Components/AUthenticate/Register';
+import UserDetails from './Components/User/UserDetails';
+import UpdateDetails from './Components/User/UpdateDetails';
+import SecureRoute from './Components/User/SecureRoute';
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
           <Route path="/product/:id" element={<ProductDesc/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/me/profile" element={
+            <SecureRoute><UserDetails/></SecureRoute>
+            }/>
+          <Route path="/me/update" element={<SecureRoute><UpdateDetails/></SecureRoute>}/>
         </Routes>
       </div>
       <Footer/>

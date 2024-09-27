@@ -1,10 +1,11 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { setauth, setuser } from '../Actions/UserSlice';
+import { setauth, setLoad, setuser } from '../Actions/UserSlice';
 
 
 export const UserApi=createApi({
   reducerPath:'UserApi',
   baseQuery:fetchBaseQuery({baseUrl:"/api/v1"}),
+  tagTypes:["User"],
   endpoints:(builder)=>({
     
     getUserdetails:builder.query({
@@ -14,15 +15,29 @@ export const UserApi=createApi({
         try {
             const {data}=await queryFulfilled;
             dispatch(setuser(data));
-            dispatch(setauth(true))
+            dispatch(setauth(true));
+            dispatch(setLoad(false))
         } catch (error) {
+          dispatch(setLoad(false))
           console.log(error)
         }
-       }
+       },
+        providesTags:["User"]
     }),
+
+    updateuser:builder.mutation({
+      query(body){
+        return {
+          url:"/user/updateprofile",
+          method:'PUT',
+          body
+        }
+      },
+      invalidatesTags:['User']
+    })
     
   })
 })
 
 
-export const {useGetUserdetailsQuery}=UserApi
+export const {useGetUserdetailsQuery,useUpdateuserMutation}=UserApi
