@@ -19,4 +19,5 @@ AuthRouter.post('/api/v1/user/password/forgot',Authcontroller.forgotpass);
 AuthRouter.put('/api/v1/user/password/reset/:token',Authcontroller.resetpass);
 
 
+
 export default AuthRouter;

@@ -1,6 +1,7 @@
 import catchasyncerror from "../Middlewares/catchasyncerror.js";
 import User from "../Model/User.js";
 import bcrypt from 'bcryptjs'
+import { delete_f, upload_f } from "../Utils/Imageupload.js";
 
 
 const Userctrl={
@@ -90,6 +91,23 @@ const Userctrl={
     res.status(200).json({success:true})
 
   }),
+
+  //*upload user logo
+  uploadlogo:catchasyncerror(async(req,res,next)=>{
+
+
+    
+    const logoRes=await upload_f(req.body.logo,"CartCraft/Logos");
+    if(req?.user?.logo?.url){
+      await delete_f(req?.user?.logo?.public_id)
+    }
+    
+
+    const user=await User.findByIdAndUpdate(req?.user?._id,{logo:logoRes});
+    
+
+    return res.status(200).json({success:true,message:'logo is updated'})
+  })
 
 
 

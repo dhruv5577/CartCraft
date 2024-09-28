@@ -6,8 +6,8 @@ export default function UserMenu() {
   const Items=[
     {Name:"profile",url:"/me/profile",icon:"fas fa-user"},
     {Name:"update profile",url:"/me/update",icon:"fas fa-user"},
-    {Name:"upload avatar",url:"/me/update_avr",icon:"fas fa-user-circle"},
-    {Name:"update password",url:"/me/update_pass",icon:"fas fa-lock"},
+    {Name:"upload avatar",url:"/me/uploadlogo",icon:"fas fa-user-circle"},
+    {Name:"update password",url:"/me/changepass",icon:"fas fa-lock"},
   ]
 
   const loc=useLocation()

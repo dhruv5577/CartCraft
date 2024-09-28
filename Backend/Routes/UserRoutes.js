@@ -26,4 +26,7 @@ UserRouter.put('/api/v1/user/getuser/:id',isAuthenticatedUser,isAuthorized("admi
 //delete details
 UserRouter.delete('/api/v1/user/getuser/:id',isAuthenticatedUser,isAuthorized("admin"),Userctrl.deleteuser)
 
+//upload logo
+UserRouter.put('/api/v1/user/updatelogo',isAuthenticatedUser,Userctrl.uploadlogo)
+
 export default UserRouter;

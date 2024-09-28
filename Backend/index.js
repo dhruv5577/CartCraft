@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_LOCAL_URL)
     process.exit(1);
   });
 
-app.use(express.json());
+app.use(express.json({limit:"10mb"}));
 app.use(cookieParser());
 
 app.use('/', ProductRouter);

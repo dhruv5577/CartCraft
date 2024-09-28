@@ -6,6 +6,7 @@ import { Template } from "../Utils/Templete.js";
 import MailSend from "../Utils/MailSender.js";
 import crypto from 'crypto'
 
+
 const Authcontroller={
 
   //*Register User
@@ -133,6 +134,8 @@ const Authcontroller={
     savetoken(user,201,res)
 
   }),
+
+  
 
 
 }

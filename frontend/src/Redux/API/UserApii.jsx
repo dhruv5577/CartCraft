@@ -34,10 +34,31 @@ export const UserApi=createApi({
         }
       },
       invalidatesTags:['User']
-    })
+    }),
+
+    uploadlogo:builder.mutation({
+      query(body){
+        return {
+          url:"/user/updatelogo",
+          method:'PUT',
+          body
+        }
+      },
+      invalidatesTags:['User']
+    }),
     
+    updatepassword:builder.mutation({
+      query(body){
+        return {
+          url:"/user/updatepass",
+          method:'PUT',
+          body
+        }
+      },
+    }),
+
   })
 })
 
 
-export const {useGetUserdetailsQuery,useUpdateuserMutation}=UserApi
+export const {useGetUserdetailsQuery,useUpdateuserMutation,useUploadlogoMutation,useUpdatepasswordMutation}=UserApi
