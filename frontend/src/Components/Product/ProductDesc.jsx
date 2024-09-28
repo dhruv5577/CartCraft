@@ -4,15 +4,48 @@ import toast from 'react-hot-toast';
 import { useGetProductDescQuery } from '../../Redux/API/ProductApi'
 import Loader from '../Layout/Loader';
 import StarRatings from 'react-star-ratings';
+import { useDispatch } from 'react-redux';
+import { setCartItm } from '../../Redux/Actions/CartSlice';
 
 export default function ProductDesc() {
 
   const params=useParams()
+  const dispatch=useDispatch();
 
   const {data,isError,error,isLoading}= useGetProductDescQuery(params.id)
   const product=data?.product;
 
   const [currImg,setCurrImg]=useState('');
+  const [quan,setQuan]=useState(1);
+
+  const insquan=()=>{
+    const count=document.querySelector(".count");
+    if(count.valueAsNumber>=product.stock) return;
+    const qty=count.valueAsNumber+1;
+    setQuan(qty)
+  }
+
+  const descquan=()=>{
+    const count=document.querySelector(".count");
+    if(count.valueAsNumber<=1) return;
+    const qty=count.valueAsNumber-1;
+    setQuan(qty)
+  }
+
+  const setCartsItm=()=>{
+      const cartItm={
+        product:product?._id,
+        name:product?.name,
+        price:product?.price,
+        image:'/images/default_images.png',
+        stock:product?.stock,
+        quan
+      };
+      dispatch(setCartItm(cartItm))
+      toast.success('Items is added in Cart')
+  }
+
+  
 
   useEffect(()=>{
     setCurrImg(product?.images[0]?product?.images[0]?.url: '/images/default_images.png')
@@ -84,20 +117,21 @@ export default function ProductDesc() {
 
         <p id="product_price">₹{product?.price}</p>
         <div className="stockCounter d-inline">
-          <span className="btn btn-danger minus">-</span>
+          <span className="btn btn-danger minus" onClick={descquan}>-</span>
           <input
             type="number"
             className="form-control count d-inline"
-            value="1"
+            value={quan}
             readonly
           />
-          <span className="btn btn-primary plus">+</span>
+          <span className="btn btn-primary plus" onClick={insquan}>+</span>
         </div>
         <button
           type="button"
           id="cart_btn"
           className="btn btn-primary d-inline ms-4"
-          disabled=""
+          disabled={product.stock<=0}
+          onClick={setCartsItm}
         >
           Add to Cart
         </button>

@@ -12,6 +12,9 @@ import UpdateDetails from './Components/User/UpdateDetails';
 import SecureRoute from './Components/User/SecureRoute';
 import UploadLogo from './Components/User/UploadLogo';
 import UpdatePassword from './Components/User/UpdatePassword';
+import ForgotPass from './Components/AUthenticate/ForgotPass';
+import ResetPass from './Components/AUthenticate/ResetPass';
+import CartList from './Components/Cart/CartList';
 
 function App() {
   return (
@@ -25,10 +28,13 @@ function App() {
           <Route path="/product/:id" element={<ProductDesc/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/password/forgot" element={ <ResetPass/>}/>
+          <Route path="/password/reset/:token" element={ <ForgotPass/>}/>
           <Route path="/me/profile" element={<SecureRoute><UserDetails/></SecureRoute>}/>
           <Route path="/me/update" element={<SecureRoute><UpdateDetails/></SecureRoute>}/>
           <Route path="/me/uploadlogo" element={<SecureRoute> <UploadLogo/> </SecureRoute>}/>
           <Route path="/me/changepass" element={<SecureRoute> <UpdatePassword/> </SecureRoute>}/>
+          <Route path="/cart" element={ <CartList/>}/>
         </Routes>
       </div>
       <Footer/>
